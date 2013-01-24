@@ -1,0 +1,26 @@
+---
+title: Home
+---
+
+.contact
+  .row
+    .span.right
+      .address
+        Avenida del Rey Santo, 3D
+        %br
+        Planta 3 - Oficina 3
+        %br
+        13001 Ciudad Real
+
+        .map
+          %a{:href => @config[:contact][:map], :class => 'icon icon-marker right-align'} Ver mapa
+
+    .span.left
+      Si desea contactar con nosotros, puede llamarnos o escribirnos a través de los siguientes datos:
+
+      .email
+        %a{:href => "mailto:#{@config[:contact][:email]}", :class => 'icon icon-mail'}= @config[:contact][:email]
+
+      .phone
+        Tel.
+        %a{:href => "tel:#{@config[:contact][:phone].gsub(/\s+/, '')}"}= @config[:contact][:phone]

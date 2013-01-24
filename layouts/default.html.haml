@@ -1,0 +1,47 @@
+!!! 5
+%html{:lang => "en"}
+  %head
+    - site = @config[:site]
+
+    %title #{site[:title]} - #{@item[:title]}
+
+    -# Meta
+    %meta{:charset => "utf-8"}
+    %meta{:name => "author", :content => site[:author]}
+    %meta{:name => "revisit-after", :content => "3 days"}
+    %meta{:name => "generator", :content => "nanoc #{Nanoc::VERSION}"}
+    %meta{:name => "description", :content => "#{site[:description]}"}
+    %meta{:name => "keywords", :content => "#{site[:keywords]}"}
+
+    -# Icons
+    %link{:href => "/apple-touch-icon-144x144.png", :rel => "apple-touch-icon-precomposed", :sizes => "144x144"}
+    %link{:href => "/apple-touch-icon-114x114.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}
+    %link{:href => "/apple-touch-icon-72x72.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon-precomposed"}
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}
+
+    %link{:rel => "stylesheet", :href => "#{site[:assets]}/stylesheets/screen.css", :type => "text/css", :media => "all"}
+
+    -# Web fonts
+    %link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic", :type => "text/css", :media => "all"}
+
+    /[if lt IE 9]
+      %script{:src => "http://html5shim.googlecode.com/svn/trunk/html5.js", :type => "text/javascript"}
+
+  %body
+    #content
+      = yield
+      .clear
+
+  - unless site[:analytics].nil?
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '#{site[:analytics]}']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
